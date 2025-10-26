@@ -1,0 +1,24 @@
+name = "mandelbrot"
+version = "0.1.0"
+license = "license"
+author = "Milan Skocic"
+maintainer = "milan.skocic@icloud.com"
+copyright = "Copyright 2023, Milan Skocic"
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+module-naming = false
+[install]
+library = false
+[fortran]
+implicit-typing = false
+implicit-external = false
+source-form = "free"
+
+[dependencies]
+stdlib = "*"
+
+[executable]
+name = "app"
+source = "main.f90"

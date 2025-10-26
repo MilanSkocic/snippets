@@ -1,0 +1,3 @@
+// the configured options and settings for Tutorial
+#define progcmake_VERSION_MAJOR @progcmake_VERSION_MAJOR@
+#define progcmake_VERSION_MINOR @progcmake_VERSION_MINOR@
