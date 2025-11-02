@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+md="./src/*"
+for i in $md; do
+    echo $i
+    section=$(echo $(basename $i) | cut -d "." -f 2)
+    mkdir -p "man/man$section"
+done
