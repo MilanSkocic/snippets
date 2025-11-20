@@ -1,23 +1,22 @@
-SRC_DIR=./src
-MAN_DIR=./man
+SRC_DIR=src
+BUILD_DIR=build
 
 SRC=$(wildcard $(SRC_DIR)/*.md)
-GZ=$(patsubst $(SRC_DIR)/%.md, $(MAN_DIR)/%.gz, $(SRC))
-HTML=$(patsubst $(MAN_DIR)/%.gz, $(MAN_DIR)/%.html, $(GZ))
+GZ=$(patsubst $(SRC_DIR)/%.md, $(BUILD_DIR)/%, $(SRC))
+HTML=$(patsubst $(BUILD_DIR)/%, $(BUILD_DIR)/%.html, $(GZ))
 
 .PHONY: clean
 
 all: $(GZ) $(HTML)
 
-$(MAN_DIR)/%.gz: $(SRC_DIR)/%.md
+$(BUILD_DIR)/%: $(SRC_DIR)/%.md
 	pandoc --standalone --to man --from markdown $^ -o $@
 
-$(MAN_DIR)/%.html: $(MAN_DIR)/%.gz
+$(BUILD_DIR)/%.html: $(BUILD_DIR)/%
 	pandoc --standalone --to html --from man $^ -o $@
-	for i in 1 2 3 4 5 6 7 8; do \
-		mv man/*.$$i.* man/man$$i/ 2>/dev/null; true; \
-	done
-	
+
+show: $(GZ)
+	man $(BUILD_DIR)/test*.1
 
 clean:
-	rm -rf man/*
+	rm -rf $(BUILD_DIR)/*
