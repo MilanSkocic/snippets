@@ -1,6 +1,3 @@
 NAME=prog
 SECTION=1
 
-SRC_DIR=../src
-PROGRAM=../build/$(NAME)
-MAN=$(BUILD_DIR)/$(NAME).$(SECTION)
