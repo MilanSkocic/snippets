@@ -1,3 +1,28 @@
+!===============================================================================
+! 
+! Current state of prep(1):(05:48 27 Nov 2025)
+! Total lines read ............... 2
+! Conditional nesting level....... 0
+! G_WRITE (general processing).... T
+! G_LLWRITE (write input lines)... T
+! Arguments ...................... --comment doxygen core.FF 
+! Open files:
+!    unit ! line number ! filename
+!      50 !           2 ! core.FF
+! INCLUDE directories:
+!    .
+! Variables:(There are 10 variables defined)
+!    $DEFINE WINDOWS  =  3
+!    $DEFINE UNKNOWN  =  0
+!    $DEFINE SYSTEMON  =  .FALSE.
+!    $DEFINE SOLARIS  =  5
+!    $DEFINE OS  =  1
+!    $DEFINE OPENBSD  =  7
+!    $DEFINE MACOS  =  2
+!    $DEFINE LINUX  =  1
+!    $DEFINE FREEBSD  =  6
+!    $DEFINE CYGWIN  =  4
+!-------------------------------------------------------------------------------
 !>
 !!##NAME
 !!     core - Elementary module
@@ -10,7 +35,7 @@
 module core
 
     integer, parameter :: x = 1
-
+    character(len=*), parameter="M. Skocic"
 
 contains
 

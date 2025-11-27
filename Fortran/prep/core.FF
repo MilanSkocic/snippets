@@ -1,3 +1,6 @@
+$OUTPUT core.f90
+$show
+$set AUTHOR "M. Skocic"
 $BLOCK comment --file core.3f.txt
 NAME
     core - Elementary module
@@ -10,7 +13,7 @@ $ENDBLOCK
 module core
 
     integer, parameter :: x = 1 
-
+    character(len=*), parameter=${AUTHOR}
 
 contains
 
@@ -27,6 +30,10 @@ function f(x)result(r)
     r=x+1
 end function
 
+$BLOCK null --file ggg.3f.txt
+NAME
+    g(3f) - djfdjfj
+$ENDBLOCK
 integer function g() 
 $@(#) core::g(3f): function to copy char array to string
 end function

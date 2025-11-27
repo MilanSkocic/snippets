@@ -6,7 +6,7 @@ export PREP_DOCUMENT_DIR=./
 all: $(SRC) 
 
 %.f90: %.FF
-	prep --comment doxygen $< -o $@
+	prep --comment doxygen $<
 
 .PHONY: doc
 doc:
