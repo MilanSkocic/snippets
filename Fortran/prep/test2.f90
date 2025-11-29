@@ -1,2 +1,0 @@
-function testmd()
-end function

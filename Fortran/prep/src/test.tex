@@ -1,0 +1,53 @@
+\begin{document}
+
+A complete module can be written with a Latex file. The code is 
+extracted from the tex file.
+
+For example, the module will be declared.
+
+\begin{minted}{Fortran}
+$BLOCK comment --file test.3f.txt
+NAME
+    test(3f) - Dummy test module
+$ENDBLOCK
+module test
+    use iso_fortran_env
+
+contains
+end module
+\end{minted}
+
+\begin{minted}{Fortran}
+$BLOCK comment --file ftest.3f.txt
+NAME
+    ftest(3f) - Test this feature.
+$ENDBLOCK
+function ftest(x)result(r)
+    integer, intent(in) :: x
+    integer :: r
+    r  = x+2
+end function    
+\end{minted}
+
+some text after
+
+\begin{minted}{Fortran}
+$BLOCK comment --file tafel.3f.txt
+NAME
+    tafel(3f) - Test this feature.
+$ENDBLOCK
+function tafel(x)result(r)
+    integer, intent(in) :: x
+    integer :: r
+    r  = x+2
+end function    
+\end{minted}
+
+
+And finally, the module is closed.
+
+\begin{minted}{Fortran}
+end module
+\end{minted}
+
+\end{document}

@@ -1,29 +1,29 @@
-FFSRC=$(wildcard *.FF)
-TEXSRC=$(wildcard *.tex)
-MDSRC=$(wildcard *.md)
+include make.in
 
-SRC=$(patsubst %.FF, %.f90, $(FFSRC)) $(patsubst %.tex, %.f90, $(TEXSRC)) $(patsubst %.md, %.f90, $(MDSRC))
+SRCDIR=src
+
+FFSRC=$(wildcard $(SRCDIR)/*.FF)
+TEXSRC=$(wildcard $(SRCDIR)/*.tex)
+MDSRC=$(wildcard $(SRCDIR)/*.md)
+
+SRC=$(patsubst $(SRCDIR)/%.FF, $(SRCDIR)/%.f90, $(FFSRC)) $(patsubst $(SRCDIR)/%.tex, $(SRCDIR)/%.f90, $(TEXSRC)) $(patsubst $(SRCDIR)/%.md, $(SRCDIR)/%.f90, $(MDSRC))
 
 export PREP_DOCUMENT_DIR=./
 
 all: $(SRC)
 
-%.f90: %.FF
-	prep --comment doxygen $<
+$(SRCDIR)/%.f90: $(SRCDIR)/%.FF
+	prep $< -o $@
 
-%.f90: %.tex
-	prep -i $<
+$(SRCDIR)/%.f90: $(SRCDIR)/%.tex
+	prep $< -o $@
 
-%.f90: %.md
-	prep -i $< -o $@
+$(SRCDIR)/%.f90: $(SRCDIR)/%.md
+	prep $< -o $@
 
 .PHONY: doc
 doc:
 	make -C doc
-	doxygen doxin
-
-tex:
-
 
 clean:
-	rm -rf *.f90
+	rm $(SRC)

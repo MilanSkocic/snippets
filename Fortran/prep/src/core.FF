@@ -1,5 +1,6 @@
-$OUTPUT core.f90
+$IFDEF DEBUG
 $show
+$ENDIF
 $set AUTHOR "M. Skocic"
 $BLOCK comment --file core.3f.txt
 NAME
