@@ -1,16 +1,16 @@
 !===============================================================================
 ! 
-! Current state of prep(1):(16:02 30 Nov 2025)
+! Current state of prep(1):(22:18 30 Nov 2025)
 ! Total lines read ............... 2
 ! Conditional nesting level....... 1
 ! G_WRITE (general processing).... T
 ! G_LLWRITE (write input lines)... T
-! Arguments ...................... src/prep/core.FF -o src/core.f90 
+! Arguments ...................... core.FF -o core.f90 
 ! Open files:
 !    unit ! line number ! filename
-!      50 !           2 ! src/prep/core.FF
+!      50 !           2 ! core.FF
 ! INCLUDE directories:
-!    src/prep
+!    .
 ! Variables:(There are 10 variables defined)
 !    $DEFINE WINDOWS  =  3
 !    $DEFINE UNKNOWN  =  0

@@ -1,19 +1,24 @@
-PREPDIR=prep
+include ../make.in
 
-PREP=$(wildcard $(PREPDIR)/*.prepdoc)
-MAN=$(patsubst $(PREPDIR)/%.3f.prepdoc, man/%.3f, $(PREP))
-MANGZ=$(patsubst $(PREPDIR)/%.3f.prepdoc, man/%.3f.gz, $(PREP))
-MANPDF=$(patsubst $(PREPDIR)/%.3f.prepdoc, man/%.3f.pdf, $(PREP))
-MANLATEX=$(patsubst $(PREPDIR)/%.3f.prepdoc, man/%.3f.tex, $(PREP))
-MANHTML=$(patsubst $(PREPDIR)/%.3f.prepdoc, man/%.3f.html, $(PREP))
-MANTXT=$(patsubst $(PREPDIR)/%.3f.prepdoc, man/%.3f.txt, $(PREP))
+PREPDOCDIR=../$(PREPDIR)/doc
 
-DOC_TXT=txt/manual.txt
-DOC_LATEX=latex/manual.tex
+PREP=$(wildcard $(PREPDOCDIR)/*.prepdoc)
+MAN=$(patsubst $(PREPDOCDIR)/%.3f.prepdoc, build/man/%.3f, $(PREP))
+MANGZ=$(patsubst $(PREPDOCDIR)/%.3f.prepdoc, build/man/%.3f.gz, $(PREP))
+MANPDF=$(patsubst $(PREPDOCDIR)/%.3f.prepdoc, build/man/%.3f.pdf, $(PREP))
+MANLATEX=$(patsubst $(PREPDOCDIR)/%.3f.prepdoc, build/man/%.3f.tex, $(PREP))
+MANHTML=$(patsubst $(PREPDOCDIR)/%.3f.prepdoc, build/man/%.3f.html, $(PREP))
+MANTXT=$(patsubst $(PREPDOCDIR)/%.3f.prepdoc, build/man/%.3f.txt, $(PREP))
 
-all: man txt latex
+DOC_TXT=build/txt/$(NAME).txt
+DOC_LATEX=build/latex/$(NAME).tex
+DOC_LATEX_PDF=build/latex/$(NAME).pdf
 
+all: dirs man txt latex
 
+.PHONY: dirs
+dirs:
+	mkdir -p build/html build/latex build/man build/txt
 
 #------------------------------------------------------------------------------
 # MAN OUTPUT
@@ -29,25 +34,25 @@ manlatex: $(MANLATEX)
 
 manpdf: $(MANPDF)
 
-man/%.3f: prep/%.3f.prepdoc
-	txt2man -s 3f -t $(shell basename -s .prepdoc $<) -r "codata" -v "Library Functions Manual"  $< > $@
+build/man/%.3f: $(PREPDOCDIR)/%.3f.prepdoc
+	txt2man -s 3f -t $(shell basename -s .prepdoc $<) -r $(NAME) -v "Library Functions Manual"  $< > $@
 
-man/%.3f.gz: man/%.3f
+build/man/%.3f.gz: build/man/%.3f
 	gzip -c $< > $@
 
-man/%.3f.pdf: man/%.3f
+build/man/%.3f.pdf: build/man/%.3f
 	pandoc -s --from man --to pdf $< -o $@
 
-man/%.3f.tex: man/%.3f
+build/man/%.3f.tex: build/man/%.3f
 	pandoc --from man --to latex $< -o $@
 	echo "" >> $@
 	echo "" >> $@
 	echo "" >> $@
 
-man/%.3f.html: man/%.3f
+build/man/%.3f.html: build/man/%.3f
 	man2html -r $< > $@
 
-man/%.3f.txt: man/%.3f
+build/man/%.3f.txt: build/man/%.3f
 	man $< > $@
 	echo "" >> $@
 	echo "" >> $@
@@ -68,10 +73,15 @@ $(DOC_TXT): $(MANTXT)
 
 #------------------------------------------------------------------------------
 # LATEX OUTPUT
-latex: $(DOC_LATEX)
+latex: $(DOC_LATEX) $(DOC_LATEX_PDF)
 
 $(DOC_LATEX): $(MANLATEX)
-	cat $^ > $@
+	cat $^ > build/latex/content.tex
+	./compile_latex.sh
+
+$(DOC_LATEX_PDF): $(DOC_LATEX)
+	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
+
 #------------------------------------------------------------------------------
 
 
@@ -80,4 +90,4 @@ $(DOC_LATEX): $(MANLATEX)
 #------------------------------------------------------------------------------
 # OTHERS
 clean:
-	rm -f $(PREP) $(MAN) $(MANGZ) $(MANTXT) $(MANHTML) $(MANLATEX) $(MANPDF) $(DOC_TXT) $(DOC_LATEX)
+	rm -rf build/*

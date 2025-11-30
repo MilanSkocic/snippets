@@ -1,9 +1,0 @@
-ftest.3f(3f)                       Library Functions Manual                       ftest.3f(3f)
-
-NAME
-       ftest(3f) - Test this feature.
-
-codata                                 30 November 2025                           ftest.3f(3f)
-
-
-

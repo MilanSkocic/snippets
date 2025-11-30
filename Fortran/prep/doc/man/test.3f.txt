@@ -1,9 +1,0 @@
-test.3f(3f)                        Library Functions Manual                        test.3f(3f)
-
-NAME
-       test(3f) - Dummy test module
-
-codata                                 30 November 2025                            test.3f(3f)
-
-
-
