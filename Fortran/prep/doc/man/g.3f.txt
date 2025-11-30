@@ -1,0 +1,9 @@
+g.3f(3f)                           Library Functions Manual                           g.3f(3f)
+
+NAME
+       g(3f) - djfdjfj
+
+codata                                 30 November 2025                               g.3f(3f)
+
+
+

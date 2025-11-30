@@ -1,29 +1,35 @@
 include make.in
 
-SRCDIR=src
 
-FFSRC=$(wildcard $(SRCDIR)/*.FF)
-TEXSRC=$(wildcard $(SRCDIR)/*.tex)
-MDSRC=$(wildcard $(SRCDIR)/*.md)
+FFSRC=$(wildcard $(SRCDIR)/prep/*.FF)
+TEXSRC=$(wildcard $(SRCDIR)/prep/*.tex)
+MDSRC=$(wildcard $(SRCDIR)/prep/*.md)
 
-SRC=$(patsubst $(SRCDIR)/%.FF, $(SRCDIR)/%.f90, $(FFSRC)) $(patsubst $(SRCDIR)/%.tex, $(SRCDIR)/%.f90, $(TEXSRC)) $(patsubst $(SRCDIR)/%.md, $(SRCDIR)/%.f90, $(MDSRC))
+SRC=$(patsubst $(SRCDIR)/prep/%.FF, $(SRCDIR)/%.f90, $(FFSRC)) \
+	$(patsubst $(SRCDIR)/prep/%.tex, $(SRCDIR)/%.f90, $(TEXSRC)) \
+	$(patsubst $(SRCDIR)/prep/%.md, $(SRCDIR)/%.f90, $(MDSRC))
 
-export PREP_DOCUMENT_DIR=./
 
-all: $(SRC)
+all: sources prep
 
-$(SRCDIR)/%.f90: $(SRCDIR)/%.FF
+sources: $(SRC)
+
+$(SRCDIR)/%.f90: $(SRCDIR)/prep/%.FF
 	prep $< -o $@
 
-$(SRCDIR)/%.f90: $(SRCDIR)/%.tex
+$(SRCDIR)/%.f90: $(SRCDIR)/prep/%.tex
 	prep $< -o $@
 
-$(SRCDIR)/%.f90: $(SRCDIR)/%.md
+$(SRCDIR)/%.f90: $(SRCDIR)/prep/%.md
 	prep $< -o $@
+
+prep: $(SRC)
+	mv -fv doc/*.prepdoc doc/prep/
 
 .PHONY: doc
 doc:
 	make -C doc
 
 clean:
-	rm $(SRC)
+	rm -rf $(BUILDDIR)/doc/*
+	rm -f $(SRC)

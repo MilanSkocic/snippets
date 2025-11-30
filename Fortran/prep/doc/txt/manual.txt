@@ -1,0 +1,60 @@
+core.3f(3f)                        Library Functions Manual                        core.3f(3f)
+
+NAME
+       core - Elementary module
+
+SYNOPSIS
+         core(3f)
+
+DESCRIPTION
+       Compute the core physics of a nuclear power plant
+
+codata                                 30 November 2025                            core.3f(3f)
+
+
+
+f.3f(3f)                           Library Functions Manual                           f.3f(3f)
+
+NAME
+       f(3f) - test function
+
+codata                                 30 November 2025                               f.3f(3f)
+
+
+
+ftest.3f(3f)                       Library Functions Manual                       ftest.3f(3f)
+
+NAME
+       ftest(3f) - Test this feature.
+
+codata                                 30 November 2025                           ftest.3f(3f)
+
+
+
+g.3f(3f)                           Library Functions Manual                           g.3f(3f)
+
+NAME
+       g(3f) - djfdjfj
+
+codata                                 30 November 2025                               g.3f(3f)
+
+
+
+tafel.3f(3f)                       Library Functions Manual                       tafel.3f(3f)
+
+NAME
+       tafel(3f) - Test this feature.
+
+codata                                 30 November 2025                           tafel.3f(3f)
+
+
+
+test.3f(3f)                        Library Functions Manual                        test.3f(3f)
+
+NAME
+       test(3f) - Dummy test module
+
+codata                                 30 November 2025                            test.3f(3f)
+
+
+

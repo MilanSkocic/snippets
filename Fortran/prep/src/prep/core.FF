@@ -2,14 +2,14 @@ $IFDEF DEBUG
 $show
 $ENDIF
 $set AUTHOR "M. Skocic"
-$BLOCK comment --file core.3f.txt
+$BLOCK comment --file core.3f.prepdoc
 NAME
     core - Elementary module
 SYNOPSIS
     core(3f)
 DESCRIPTION
     Compute the core physics of a nuclear power plant
-    $ \alpha $ 
+
 $ENDBLOCK
 module core
 
@@ -18,7 +18,7 @@ module core
 
 contains
 
-$BLOCK comment --file f.3f.txt
+$BLOCK comment --file f.3f.prepdoc
 NAME
     f(3f) - test function
 $ENDBLOCK
@@ -31,7 +31,7 @@ function f(x)result(r)
     r=x+1
 end function
 
-$BLOCK null --file ggg.3f.txt
+$BLOCK null --file g.3f.prepdoc
 NAME
     g(3f) - djfdjfj
 $ENDBLOCK

@@ -1,0 +1,10 @@
+Status: 500 Internal Server Error
+Content-type: text/html; charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>man2html: bad invocation</TITLE></HEAD>
+<BODY>
+<H1>man2html: bad invocation</H1>
+Call: man2html [-l|-h host.domain:port] [-p|-q] [filename]
+or:   man2html -r [filename]
+</BODY></HTML>

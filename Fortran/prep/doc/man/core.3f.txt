@@ -1,0 +1,15 @@
+core.3f(3f)                        Library Functions Manual                        core.3f(3f)
+
+NAME
+       core - Elementary module
+
+SYNOPSIS
+         core(3f)
+
+DESCRIPTION
+       Compute the core physics of a nuclear power plant
+
+codata                                 30 November 2025                            core.3f(3f)
+
+
+

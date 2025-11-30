@@ -1,10 +1,35 @@
+!===============================================================================
+! 
+! Current state of prep(1):(16:02 30 Nov 2025)
+! Total lines read ............... 2
+! Conditional nesting level....... 1
+! G_WRITE (general processing).... T
+! G_LLWRITE (write input lines)... T
+! Arguments ...................... src/prep/core.FF -o src/core.f90 
+! Open files:
+!    unit ! line number ! filename
+!      50 !           2 ! src/prep/core.FF
+! INCLUDE directories:
+!    src/prep
+! Variables:(There are 10 variables defined)
+!    $DEFINE WINDOWS  =  3
+!    $DEFINE UNKNOWN  =  0
+!    $DEFINE SYSTEMON  =  .FALSE.
+!    $DEFINE SOLARIS  =  5
+!    $DEFINE OS  =  1
+!    $DEFINE OPENBSD  =  7
+!    $DEFINE MACOS  =  2
+!    $DEFINE LINUX  =  1
+!    $DEFINE FREEBSD  =  6
+!    $DEFINE CYGWIN  =  4
+!-------------------------------------------------------------------------------
 ! NAME
 !     core - Elementary module
 ! SYNOPSIS
 !     core(3f)
 ! DESCRIPTION
 !     Compute the core physics of a nuclear power plant
-!     $ \alpha $
+!
 module core
 
     integer, parameter :: x = 1
