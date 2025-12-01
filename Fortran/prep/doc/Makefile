@@ -76,10 +76,11 @@ $(DOC_TXT): $(MANTXT)
 latex: $(DOC_LATEX) $(DOC_LATEX_PDF)
 
 $(DOC_LATEX): $(MANLATEX)
-	cat $^ > build/latex/content.tex
-	./compile_latex.sh
+	./make_latexpdf $^
 
 $(DOC_LATEX_PDF): $(DOC_LATEX)
+	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
+	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
 	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
 
 #------------------------------------------------------------------------------

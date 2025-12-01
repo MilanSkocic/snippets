@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+source ../make.in
+
+TEX="build/latex/$NAME.tex"
+TMP="build/latex/tmp.tex"
+CONTENT="build/latex/content.tex"
+content="\\\include{content.tex}"
+
+args=($*)
+title="$NAME --- Documentation"
+author="$AUTHOR"
+
+section=""
+echo "" > $CONTENT
+for i in ${args[@]}; do
+    section=$(basename -s .tex $i)
+    echo "\\section{$section} " >> $CONTENT
+    sed -E 's/section/subsection/g' $i >> $CONTENT
+done
+
+cat tex/template.tex > $TMP
+sed -E "s/<title>/$title/g" $TMP > $TEX
+cat $TEX > $TMP
+sed -E "s/<author>/$author/g" $TMP > $TEX
+cat $TEX > $TMP
+sed -E "s/<content>/$content/g" $TMP > $TEX
