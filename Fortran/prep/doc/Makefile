@@ -82,6 +82,7 @@ $(DOC_LATEX_PDF): $(DOC_LATEX)
 	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
 	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
 	pdflatex --synctex=1 --output-dir=build/latex $< -o $@
+	make4ht -d build/html -B build $< 
 
 #------------------------------------------------------------------------------
 
