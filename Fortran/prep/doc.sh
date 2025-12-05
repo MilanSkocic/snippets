@@ -140,7 +140,7 @@ DOCPDF="$BUILD_DIR/latex/$NAME-doc.pdf"
 files=$(ls $BUILD_DIR/man/*.tex)
 title="$NAME $VERSION"
 
-echo "\\documentclass[11pt, a4paper]{article}" > $DOCTEX
+echo "\\documentclass[11pt, a4paper,titlepage]{article}" > $DOCTEX
 cat $LATEXPKGS >> $DOCTEX
 echo  "\\title{$title}" >> $DOCTEX
 echo "\\author{$AUTHOR}" >> $DOCTEX
@@ -148,6 +148,7 @@ echo "\\author{$AUTHOR}" >> $DOCTEX
 echo "\\begin{document}" >> $DOCTEX
 echo "\\maketitle" >> $DOCTEX
 echo "\\tableofcontents" >> $DOCTEX
+echo "\\clearpage" >> $DOCTEX
 
 for file in $files; do
     man_name=$(basename -s .tex $file)

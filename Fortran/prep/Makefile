@@ -13,7 +13,7 @@ prep:
 
 .PHONY: doc
 doc:
-	make -C doc
+	./doc.sh
 
 clean:
 	rm -rf $(BUILDDIR)/*
