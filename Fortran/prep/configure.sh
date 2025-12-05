@@ -5,6 +5,7 @@ SRCDIR=src
 PREPDIR=prep
 BUILDDIR=build
 PREP_DOCUMENT_DIR=./
+MANWIDTH=72
 
 is_debug () {
     args=($*)
@@ -25,3 +26,4 @@ echo "export SRCDIR=$SRCDIR" >> make.in
 echo "export PREPDIR=$PREPDIR" >> make.in
 echo "export BUILDDIR=$BUILDDIR" >> make.in
 echo "export PREP_DOCUMENT_DIR=$PREP_DOCUMENT_DIR" >> make.in
+echo "export MANWIDTH=$MANWIDTH" >> make.in

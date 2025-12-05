@@ -5,3 +5,4 @@ export SRCDIR=src
 export PREPDIR=prep
 export BUILDDIR=build
 export PREP_DOCUMENT_DIR=./
+export MANWIDTH=72
