@@ -1,6 +1,6 @@
 !===============================================================================
 ! 
-! Current state of prep(1):(22:18 30 Nov 2025)
+! Current state of prep(1):(01:19  5 Dec 2025)
 ! Total lines read ............... 2
 ! Conditional nesting level....... 1
 ! G_WRITE (general processing).... T
