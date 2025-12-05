@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+AUTHOR="M. Skocic"
 NAME="libname"
 SRCDIR=src
 PREPDIR=prep
 BUILDDIR=build
 PREP_DOCUMENT_DIR=./
 MANWIDTH=72
+VERSION=1.0
 
 is_debug () {
     args=($*)
@@ -27,3 +29,5 @@ echo "export PREPDIR=$PREPDIR" >> make.in
 echo "export BUILDDIR=$BUILDDIR" >> make.in
 echo "export PREP_DOCUMENT_DIR=$PREP_DOCUMENT_DIR" >> make.in
 echo "export MANWIDTH=$MANWIDTH" >> make.in
+echo "export VERSION=$VERSION" >> make.in
+echo "export AUTHOR=\"$AUTHOR\"" >> make.in

@@ -6,3 +6,5 @@ export PREPDIR=prep
 export BUILDDIR=build
 export PREP_DOCUMENT_DIR=./
 export MANWIDTH=72
+export VERSION=1.0
+export AUTHOR="M. Skocic"
