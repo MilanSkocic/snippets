@@ -1,16 +1,18 @@
 include ../make.in
 
 FFSRC=$(wildcard *.FF)
+CCSRC=$(wildcard *.CC)
 TEXSRC=$(wildcard *.tex)
 MDSRC=$(wildcard *.md)
 
 
 f90=$(patsubst %.FF, %.f90, $(FFSRC)) \
+	$(patsubst %.CC, %.c, $(CCSRC)) \
 	$(patsubst %.tex, %.f90, $(TEXSRC)) \
 	$(patsubst %.md, %.f90, $(MDSRC))
 
 all: dirs sources
-	mv -fv *.f90 ../$(SRCDIR)/
+	mv -fv $(f90) ../$(SRCDIR)/
 
 .PHONY: dirs
 dirs:
@@ -19,6 +21,9 @@ dirs:
 sources: $(f90)
 
 %.f90: %.FF
+	prep $< -o $@
+
+%.c: %.CC
 	prep $< -o $@
 
 %.f90: %.tex
