@@ -31,3 +31,9 @@ echo "export PREP_DOCUMENT_DIR=$PREP_DOCUMENT_DIR" >> make.in
 echo "export MANWIDTH=$MANWIDTH" >> make.in
 echo "export VERSION=$VERSION" >> make.in
 echo "export AUTHOR=\"$AUTHOR\"" >> make.in
+
+
+
+echo "\\def\\NAME{$NAME}" >> doc/src/make.in.tex
+echo "\\def\\VERSION{$VERSION}" >> doc/src/make.in.tex
+echo "\\def\\AUTHOR{$AUTHOR}" >> doc/src/make.in.tex

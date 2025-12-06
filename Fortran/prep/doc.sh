@@ -134,41 +134,28 @@ done
 echo "[STATUS]: Text documentation created."
 
 
-echo "[INOF]: Generating pdf documentation."
-DOCTEX="$BUILD_DIR/latex/$NAME-doc.tex"
-DOCPDF="$BUILD_DIR/latex/$NAME-doc.pdf"
+echo "[INOF]: Generating latex documentation."
+DOC="$BUILD_DIR/latex/prep.tex"
 files=$(ls $BUILD_DIR/man/*.tex)
-title="$NAME $VERSION"
-
-echo "\\documentclass[11pt, a4paper,titlepage]{article}" > $DOCTEX
-cat $LATEXPKGS >> $DOCTEX
-echo  "\\title{$title}" >> $DOCTEX
-echo "\\author{$AUTHOR}" >> $DOCTEX
-
-echo "\\begin{document}" >> $DOCTEX
-echo "\\maketitle" >> $DOCTEX
-echo "\\tableofcontents" >> $DOCTEX
-echo "\\clearpage" >> $DOCTEX
-
+echo "" > $DOC
 for file in $files; do
     man_name=$(basename -s .tex $file)
     man_section=$(echo $man_name | cut -d "." -f 2)
     man_number=${man_section:0:1}
-    echo "\\section{$man_name}\\label{sec_$man_name}" >> $DOCTEX
-    echo "\\input{$file}" >> $DOCTEX
+    echo "\\section{$man_name\\index{$man_name}}\\label{sec_$man_name}" >> $DOC
+    # echo "\\input{$file}" >> $DOC
+    echo "\\input{build/man/$(basename $file)}" >> $DOC
+    echo "" >> $DOC
 done
 
-echo "\\end{document}" >> $DOCTEX
-tmp_dir="$BUILD_DIR/latex/build"
-mkdir -p $tmp_dir
-$TEXENGINE -synctex=1 -output-directory=$tmp_dir $OPTION_LATEX_VERBOSE $DOCTEX
-$TEXENGINE -synctex=1 -output-directory=$tmp_dir $OPTION_LATEX_VERBOSE $DOCTEX
-$TEXENGINE -synctex=1 -output-directory=$tmp_dir $OPTION_LATEX_VERBOSE $DOCTEX
-mv $FLAGS_MV $tmp_dir/"$(basename $DOCPDF)" $DOCPDF
-rm $FLAGS_RM -rf $tmp_dir
-echo "[STATUS]: Pdf documentation created."
+#$TEXENGINE -synctex=1 -output-directory=$tmp_dir $OPTION_LATEX_VERBOSE $DOC
+#$TEXENGINE -synctex=1 -output-directory=$tmp_dir $OPTION_LATEX_VERBOSE $DOC
+#$TEXENGINE -synctex=1 -output-directory=$tmp_dir $OPTION_LATEX_VERBOSE $DOC
+#mv $FLAGS_MV $tmp_dir/"$(basename $DOCPDF)" $DOCPDF
+#rm $FLAGS_RM -rf $tmp_dir
+echo "[STATUS]: Latex documentation created."
 
 
-echo "[INFO]: Generating html documentation..."
-make4ht -a $OPTION_MK4_LOGLEVEL -d $BUILD_DIR/html -B $BUILD_DIR/html -c $ROOT/make4ht.cfg $DOCTEX
-echo "[STATUS]: Html documentation created."
+#echo "[INFO]: Generating html documentation..."
+#make4ht -a $OPTION_MK4_LOGLEVEL -d $BUILD_DIR/html -B $BUILD_DIR/html -c $ROOT/make4ht.cfg $DOC
+#echo "[STATUS]: Html documentation created."
