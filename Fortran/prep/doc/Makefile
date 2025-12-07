@@ -1,15 +1,6 @@
-FNAME=main
-OUTNAME=electrochemistry
-TEX=pdflatex
-BIB=biber
-VIEWER=sumatrapdf 
-NCL=makeindex
-BUILD_FOLDER=build
-SRC_FOLDER=src
-BIN_FOLDER=pdf
-HTML_FOLDER=html
-MK4BUILD=make4ht.mk4
-MK4CFG=make4ht.cfg
+include ../make.in
+
+DOC_BUILD_DIR=$(CODE_BUILDDIR)
 
 .ONESHELL:
 
@@ -18,38 +9,38 @@ MK4CFG=make4ht.cfg
 all: dirs tex biber index link copy
 
 dirs:
-	mkdir -p $(BUILD_FOLDER)
-	mkdir -p $(BIN_FOLDER)
+	mkdir -p $(DOC_BUILD_DIR)
+	mkdir -p $(DOC_BIN_DIR)
 
 tex:
-	$(TEX) -output-directory=./$(BUILD_FOLDER) -synctex=1 $(SRC_FOLDER)/$(FNAME).tex
+	$(DOC_TEX) -output-directory=./$(DOC_BUILD_DIR) -synctex=1 $(DOC_SRC_DIR)/$(DOC_FNAME).tex
 	
 biber:
-	$(BIB) ./$(BUILD_FOLDER)/$(FNAME).bcf --output-file ./$(BUILD_FOLDER)/$(FNAME).bbl
+	$(DOC_BIB) ./$(DOC_BUILD_DIR)/$(DOC_FNAME).bcf --output-file ./$(DOC_BUILD_DIR)/$(DOC_FNAME).bbl
 
 bibtex:
-	cp $(SRC_FOLDER)/references.bib $(BUILD_FOLDER)/
-	cd $(BUILD_FOLDER)
-	$(BIB) $(FNAME).aux 
+	cp $(DOC_SRC_DIR)/references.bib $(DOC_BUILD_DIR)/
+	cd $(DOC_BUILD_DIR)
+	$(DOC_BIB) $(DOC_FNAME).aux 
 	cd ..
 
 link:
-	$(TEX) -output-directory=./$(BUILD_FOLDER) -synctex=1 $(SRC_FOLDER)/$(FNAME).tex
-	$(TEX) -output-directory=./$(BUILD_FOLDER) -synctex=1 $(SRC_FOLDER)/$(FNAME).tex
+	$(DOC_TEX) -output-directory=./$(DOC_BUILD_DIR) -synctex=1 $(DOC_SRC_DIR)/$(DOC_FNAME).tex
+	$(DOC_TEX) -output-directory=./$(DOC_BUILD_DIR) -synctex=1 $(DOC_SRC_DIR)/$(DOC_FNAME).tex
 
 index: 
-	$(NCL) ./$(BUILD_FOLDER)/$(FNAME).nlo -s nomencl.ist -o ./$(BUILD_FOLDER)/$(FNAME).nls
-	$(NCL) ./$(BUILD_FOLDER)/$(FNAME).idx
+	$(DOC_NCL) ./$(DOC_BUILD_DIR)/$(DOC_FNAME).nlo -s nomencl.ist -o ./$(DOC_BUILD_DIR)/$(DOC_FNAME).nls
+	$(DOC_NCL) ./$(DOC_BUILD_DIR)/$(DOC_FNAME).idx
 
 copy: 
-	cp -rf $(BUILD_FOLDER)/$(FNAME).pdf $(BIN_FOLDER)/$(OUTNAME).pdf
-	cp ./$(BUILD_FOLDER)/$(FNAME).idx ./$(BUILD_FOLDER)/$(FNAME).4idx
+	cp -rf $(DOC_BUILD_DIR)/$(DOC_FNAME).pdf $(DOC_BIN_DIR)/$(DOC_OUTNAME).pdf
+	cp ./$(DOC_BUILD_DIR)/$(DOC_FNAME).idx ./$(DOC_BUILD_DIR)/$(DOC_FNAME).4idx
 
 html: 
-	make4ht -c $(MK4CFG) -d $(HTML_FOLDER) -B $(BUILD_FOLDER) -e $(MK4BUILD) $(SRC_FOLDER)/$(FNAME).tex -a info
+	make4ht -c $(DOC_MK4CFG) -d $(DOC_HTML_DIR) -B $(DOC_BUILD_DIR) -e $(DOC_MK4BUILD) $(DOC_SRC_DIR)/$(DOC_FNAME).tex -a info
 
 clean:
-	rm -rf $(BUILD_FOLDER)/*
-	rm -rf $(BIN_FOLDER)/*
-	rm -rf $(HTML_FOLDER)/*
+	rm -rf $(DOC_BUILD_DIR)/*
+	rm -rf $(DOC_BIN_DIR)/*
+	rm -rf $(DOC_HTML_DIR)/*
 
