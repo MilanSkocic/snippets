@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myfpm"
+dynamic = ["version"]
+authors = [{name = "Milan Skocic", email = "milan.skocic@icloud.com"}]
+description = "datadigitizer: Data digitizer."
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+myfpm = ["fpm", "fpm.exe"]
+
+[project.scripts]
+myfpm = "myfpm:main"
+
