@@ -9,9 +9,6 @@ Copyright @copyright{} 2016 Free Software Foundation, Inc.
 
 @titlepage
 @title My Fortran Doc
-@page
-@vskip 0pt plus 1filll
-@insertcopying
 @end titlepage
 
 @contents
