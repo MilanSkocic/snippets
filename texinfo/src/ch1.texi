@@ -1,18 +1,27 @@
 @c Autogeneraed 
 @node First Chapter 
 @chapter First Chapter 
-A simple minimalistic text in chapter 1. It will be processed by   latex2texi .
+    A simple minimalistic text in chapter 1. It will be processed by @i{latex2texi}.
 
-@section Format Latex for Texi 
+    @section Format Latex for Texi 
 
-A simple converter will convert \LaTeX\ chapters to texi chapters. 
-It will strip down the images.
+    A simple converter will convert \LaTeX\ chapters to @t{texi} chapters. 
+    It will strip down the @i{images}.
 
-@section Mathematics 
+    @section Mathematics 
 
-The inline formulae are valid for texi 
+    The inline formulae are @b{valid} for texi @math{j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)} and
+@c     the notation with the dollar @i{sign} is not supportted $\alpha _{gg}$.
+    
+    as well as multine.
 
-
-as well as multine.
-
-
+    @section Figures 
+    Figures are also supported. The @t{includegraphics} command 
+    will be extracted and transformed to the @t{texi} equivalent command. 
+    
+@c     \begin{figure}
+@c         \centering
+@image{image,,,,.txt}
+@c         \caption{caption only on one line.}
+@c         \label{fig_caption}
+@c     \end{figure}
