@@ -26,35 +26,7 @@ This manual is for GNU Sample
 @end menu
 
 
-@node First Chapter
-@chapter First Chapter
-
-@cindex chapter, first
-This is the first chapter.
-@cindex index entry, another
-
-Here is a numbered list.
-
-@enumerate
-@item
-This is the first item.
-
-@item
-This is the second item.
-@end enumerate
-
-
-@node First Section
-@section First Section
-
-First section of first chapter.
-
-
-@node Second Section
-@section Second Section
-
-Second section of first chapter.
-
+@include src/ch1.texi
 
 @node Index
 @unnumbered Index

@@ -1,1 +1,18 @@
 @c Autogeneraed 
+@node First Chapter 
+@chapter First Chapter 
+A simple minimalistic text in chapter 1. It will be processed by   latex2texi .
+
+@section Format Latex for Texi 
+
+A simple converter will convert \LaTeX\ chapters to texi chapters. 
+It will strip down the images.
+
+@section Mathematics 
+
+The inline formulae are valid for texi 
+
+
+as well as multine.
+
+
