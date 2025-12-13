@@ -1,6 +1,6 @@
-@c Autogeneraed 
 @node First Chapter 
 @chapter First Chapter 
+    @cindex simple
     A simple minimalistic text in chapter 1. It will be processed by @i{latex2texi}.
 
     @section Format Latex for Texi 
@@ -11,17 +11,27 @@
     @section Mathematics 
 
     The inline formulae are @b{valid} for texi @math{j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)} and
-@c     the notation with the dollar @i{sign} is not supportted $\alpha _{gg}$.
-    
+    @cindex inline
     as well as multine.
 
     @section Figures 
     Figures are also supported. The @t{includegraphics} command 
     will be extracted and transformed to the @t{texi} equivalent command. 
     
-@c     \begin{figure}
-@c         \centering
-@image{image,,,,.txt}
-@c         \caption{caption only on one line.}
-@c         \label{fig_caption}
-@c     \end{figure}
+@ifinfo
+    @image{./src/figures/image,,,,.txt}
+@end ifinfo
+@ifhtml
+    @image{./src/figures/image,,,,.png}
+@end ifhtml
+
+@iflatex
+    @latex
+    \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{src/figures/image.png}
+    \caption{fig:caption}
+    \end{figure}
+    @end latex
+@end iflatex
+

@@ -1,51 +1,120 @@
-\documentclass[11pt,a4paper,twoside,openright]{book}
+\documentclass{book}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[gen]{eurosym}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{titleps}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\usepackage{float}
+% use hidelinks to remove boxes around links to be similar to Texinfo TeX
+\usepackage[hidelinks]{hyperref}
 
-\input{src/make.in.tex}
-\input{src/packages.tex}
+\makeatletter
+\newcommand{\Texinfosettitle}{MyLib}%
 
-\hypersetup{
-    bookmarks=true, 		% show bookmarks bar?
-    unicode=true,  		% non-Latin characters in Acrobat’s bookmarks
-    pdftoolbar=true,        % show Acrobat’s toolbar?
-    pdfmenubar=true,        % show Acrobat’s menu?
-    pdffitwindow=true,      % page fit to window when opened
-    pdftitle={\AUTHOR},    % title
-    pdfauthor={\AUTHOR},     % author
-    pdfsubject={},   % subject of the document
-    pdfnewwindow=true,      % links in new window
-    pdfkeywords={}, % list of keywords
-    colorlinks=False,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links
-    citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
-}
+% no index headers
+\indexsetup{level=\relax,toclevel=section}%
+\makeindex[name=cp,title=]%
+
+% redefine the \mainmatter command such that it does not clear page
+% as if in double page
+\renewcommand\mainmatter{\clearpage\@mainmattertrue\pagenumbering{arabic}}
+\newenvironment{Texinfopreformatted}{%
+  \par\GNUTobeylines\obeyspaces\frenchspacing\parskip=\z@\parindent=\z@}{}
+{\catcode`\^^M=13 \gdef\GNUTobeylines{\catcode`\^^M=13 \def^^M{\null\par}}}
+\newenvironment{Texinfoindented}{\begin{list}{}{}\item\relax}{\end{list}}
+
+% used for substitutions in commands
+\newcommand{\Texinfoplaceholder}[1]{}
+
+\newpagestyle{single}{\sethead[\chaptername{} \thechapter{} \chaptertitle{}][][\thepage]
+                              {\chaptername{} \thechapter{} \chaptertitle{}}{}{\thepage}}
+
+\newpagestyle{singlepagenum}{\sethead[][][\thepage{}]
+                              {}{}{\thepage}}
+
+% allow line breaking at underscore
+\let\Texinfounderscore\_
+\renewcommand{\_}{\Texinfounderscore\discretionary{}{}{}}
+\makeatother
+% set default for @setchapternewpage
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{\Texinfoplaceholder{setchapternewpage placeholder}\clearpage}{}{}
+\makeatother
+\pagestyle{single}%
+
+
+
+
 
 
 \begin{document}
 
-\input{./src/titlepage.tex}
-
-
-
 \frontmatter
-\pagestyle{plain}
-\tableofcontents
-\listoffigures
-\listoftables
-
-
-
+\pagestyle{empty}%
+\begin{titlepage}
+\begingroup
+\newskip\titlepagetopglue \titlepagetopglue = 1.5in
+\newskip\titlepagebottomglue \titlepagebottomglue = 2pc
+\setlength{\parindent}{0pt}
+% Leave some space at the very top of the page.
+    \vglue\titlepagetopglue
+\begin{center}
+\includegraphics[width=5cm]{src/figures/head}
+\end{center}
+{\raggedright {\huge \bfseries MyLib}}
+\vskip 4pt \hrule height 4pt width \hsize \vskip 4pt
+\rightline{Documentation}
+\vskip 0pt plus 1filll
+\leftline{\Large \bfseries M. Skocic --- PhD, Electrochemistry}%
+\vskip4pt \hrule height 2pt width \hsize
+  \vskip\titlepagebottomglue
+\endgroup
+\newpage{}%
+\phantom{blabla}%
+\vskip 0pt plus 1filll
+Copyright \copyright{} M. Skocic.
+\end{titlepage}
+\pagestyle{singlepagenum}%
+\tableofcontents\newpage
 \mainmatter
-\pagestyle{fancy}
-\input{src/ch1.tex}
+\pagestyle{single}%
+\label{anchor:Top}%
+\chapter{{First Chapter}}
+\label{anchor:First-Chapter}%
+    \index[cp]{simple@simple}%
+    A simple minimalistic text in chapter 1. It will be processed by \textit{latex2texi}.
+
+    \section{{Format Latex for Texi}}
+
+    A simple converter will convert \textbackslash{}LaTeX\textbackslash{} chapters to \texttt{texi} chapters. 
+    It will strip down the \textit{images}.
+
+    \section{{Mathematics}}
+
+    The inline formulae are \textbf{valid} for texi $j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)$ and
+    \index[cp]{inline@inline}%
+    as well as multine.
+
+    \section{{Figures}}
+    Figures are also supported. The \texttt{includegraphics} command 
+    will be extracted and transformed to the \texttt{texi} equivalent command. 
 
 
-\backmatter
-\pagestyle{plain}
-\printbibliography[heading=bibintoc]
-\printindex
+        \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{src/figures/image.png}
+    \caption{fig:caption}
+    \end{figure}
+    
 
+\chapter*{{Index}}
+\label{anchor:Index}%
+
+\printindex[cp]
 
 \end{document}
-

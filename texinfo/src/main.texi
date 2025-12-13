@@ -1,23 +1,33 @@
 \input texinfo
-@settitle MyDoc
+@settitle @value{TITLE}
+
 
 @copying
-This is a short example of a complete Texinfo file.
-
-Copyright @copyright{} 2016 Free Software Foundation, Inc.
+Copyright @copyright{} @value{AUTHOR}.
 @end copying
 
 @titlepage
-@title My Fortran Doc
+@center @image{src/figures/head,5cm,,,.png}
+@ifnothtml
+@title @value{TITLE}
+@subtitle Documentation
+@end ifnothtml
+@author @value{AUTHOR} --- PhD, Electrochemistry
+@page
+@vskip 0pt plus 1filll
+@insertcopying
 @end titlepage
 
 @contents
 
 @node Top
-@top GNU Sample
+@top @value{TITLE}
 
-This manual is for GNU Sample
-(version @value{VERSION}, @value{UPDATED}).
+
+@ifinfo
+@image{src/figures/head,,,,.txt}
+@end ifinfo
+
 
 @menu
 * First Chapter::    The first chapter is the
