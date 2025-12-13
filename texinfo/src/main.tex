@@ -52,6 +52,21 @@
 
 
 
+\usepackage[backend=biber,
+bibstyle=ieee, 
+citestyle=numeric-comp,
+natbib=true,
+doi=false, 
+url=false,
+isbn=false,
+mincitenames=1,
+maxcitenames=1,
+minbibnames=1,
+maxbibnames=99,
+backref=true,]
+{biblatex}
+\addbibresource[label=main_bib]{./src/references.bib}
+
 
 \begin{document}
 
@@ -102,6 +117,8 @@ Copyright \copyright{} M. Skocic.
     as well as multine. 
     \index[fn]{f(x)@\texttt{f(x)}}%
 
+\citep{antunes2010} 
+
     \section{{Figures}}
     Figures are also supported. The \texttt{includegraphics} command 
     will be extracted and transformed to the \texttt{texi} equivalent command. 
@@ -113,6 +130,9 @@ Copyright \copyright{} M. Skocic.
     \caption{fig:caption}
     \end{figure}
     
+
+\printbibliography[heading=bibintoc]
+
 
 \chapter*{{Index}}
 \label{anchor:Index}%

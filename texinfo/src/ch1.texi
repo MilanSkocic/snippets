@@ -14,6 +14,15 @@
     @cindex inline
     as well as multine. 
     @fnindex f(x)
+    
+@ifinfo 
+@cite{test} 
+@end ifinfo
+@iflatex
+@latex 
+\citep{antunes2010} 
+@end latex
+@end iflatex
 
     @section Figures 
     Figures are also supported. The @t{includegraphics} command 

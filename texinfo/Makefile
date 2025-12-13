@@ -6,6 +6,7 @@ MAKEINFO_OPTIONS=-D "VERSION $(VERSION)" -D "TITLE $(MS_NAME)" -D "AUTHOR $(MS_A
 MK4BUILD=html.mk4
 MK4CFG=html.cfg
 NCL=makeindex
+BIB=biber
 
 all:
 
@@ -16,6 +17,9 @@ pdf:
 index:
 	$(NCL) ./$(MS_BUILD_DIR)/cp.idx
 	$(NCL) ./$(MS_BUILD_DIR)/fn.idx
+
+biber:
+	$(BIB) ./$(MS_BUILD_DIR)/main.bcf --output-file ./$(MS_BUILD_DIR)/main.bbl
 
 info:
 	$(MS_MAKEINFO) $(MAKEINFO_OPTIONS)  $(MS_SRC_DIR)/main.texi -o $(MS_BUILD_DIR)/main.info
