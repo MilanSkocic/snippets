@@ -43,4 +43,6 @@ Copyright @copyright{} @value{AUTHOR}.
 
 @printindex cp
 
+@printindex fn
+
 @bye

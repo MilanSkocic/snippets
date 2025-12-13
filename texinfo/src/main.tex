@@ -19,6 +19,7 @@
 % no index headers
 \indexsetup{level=\relax,toclevel=section}%
 \makeindex[name=cp,title=]%
+\makeindex[name=fn,title=]%
 
 % redefine the \mainmatter command such that it does not clear page
 % as if in double page
@@ -98,7 +99,8 @@ Copyright \copyright{} M. Skocic.
 
     The inline formulae are \textbf{valid} for texi $j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)$ and
     \index[cp]{inline@inline}%
-    as well as multine.
+    as well as multine. 
+    \index[fn]{f(x)@\texttt{f(x)}}%
 
     \section{{Figures}}
     Figures are also supported. The \texttt{includegraphics} command 
@@ -116,5 +118,7 @@ Copyright \copyright{} M. Skocic.
 \label{anchor:Index}%
 
 \printindex[cp]
+
+\printindex[fn]
 
 \end{document}

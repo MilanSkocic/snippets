@@ -15,6 +15,7 @@ pdf:
 
 index:
 	$(NCL) ./$(MS_BUILD_DIR)/cp.idx
+	$(NCL) ./$(MS_BUILD_DIR)/fn.idx
 
 info:
 	$(MS_MAKEINFO) $(MAKEINFO_OPTIONS)  $(MS_SRC_DIR)/main.texi -o $(MS_BUILD_DIR)/main.info

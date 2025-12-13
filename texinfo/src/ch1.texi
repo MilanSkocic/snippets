@@ -12,7 +12,8 @@
 
     The inline formulae are @b{valid} for texi @math{j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)} and
     @cindex inline
-    as well as multine.
+    as well as multine. 
+    @fnindex f(x)
 
     @section Figures 
     Figures are also supported. The @t{includegraphics} command 
