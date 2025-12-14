@@ -1,20 +1,26 @@
 @node First Chapter 
 @chapter First Chapter 
-    @cindex simple
-    A simple minimalistic text in chapter 1. It will be processed by @i{latex2texi}.
+A simple minimalistic text in chapter 1. 
 
-    @section Format Latex for Texi 
+@section Formatting 
 
-    A simple converter will convert \LaTeX\ chapters to @t{texi} chapters. 
-    It will strip down the @i{images}.
+Text can be @b{bold} @i{italic} @t{fixed} @sc{small caps} @emph{emphasized} @strong{strong}
+@iflatex
+@latex
+\citep{gnu}
+@end latex
+@end iflatex
+@ifinfo
+\@cite{GNU TexInfo}
+@end ifinfo
 
-    @section Mathematics 
 
-    The inline formulae are @b{valid} for texi @math{j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)} and
-    @cindex inline
-    as well as multine. 
-    @fnindex f(x)
-    
+@section Mathematics 
+
+The inline formulae are @b{valid} for texi @math{j=j_0 \cdot \left(1-\exp \frac{x}{x_0}\right)} and
+@cindex inline
+as well as multine. 
+@fnindex f(x)
 @ifinfo 
 @cite{test} 
 @end ifinfo
@@ -24,24 +30,94 @@
 @end latex
 @end iflatex
 
-    @section Figures 
-    Figures are also supported. The @t{includegraphics} command 
-    will be extracted and transformed to the @t{texi} equivalent command. 
-    
-@ifinfo
-    @image{./src/figures/image,,,,.txt}
-@end ifinfo
-@ifhtml
-    @image{./src/figures/image,,,,.png}
-@end ifhtml
+@section Figures 
+Figures are also supported. The floats are directly compatible with @code{info}
+@code{latex}. 
+@command{makeinfo} allows to compile to @option{--pdf, --html, --latex}.
+Figure (@pxref{fig:caption}) shows that images can be imported.
+When the format is @option{info} it looks for a @file{*.txt} file and when the
+output is pdf it looks for any compatible format such as @file{*.png,*.pdf}.
 
-@iflatex
-    @latex
-    \begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{src/figures/image.png}
-    \caption{fig:caption}
-    \end{figure}
-    @end latex
-@end iflatex
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+
+
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+   
+
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+   
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+ksfhksdfskjfskfkshfksfskfjdsfksfsf sfsjhdf sfsjkfh sfjsjzirzej sfjsklfz
+   
+
+@float figure,fig:caption
+@center @image{./src/figures/image,10cm,,,.txt}
+@caption{New caption}
+@end float
 

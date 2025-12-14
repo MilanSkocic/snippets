@@ -59,16 +59,16 @@ backref=true,]
 
 @iflatex
 @latex
+\backmatter
+\pagestyle{plain}
 \printbibliography[heading=bibintoc]
 @end latex
 @end iflatex
 
-
 @node Index
 @unnumbered Index
-
 @printindex cp
-
 @printindex fn
+
 
 @bye
