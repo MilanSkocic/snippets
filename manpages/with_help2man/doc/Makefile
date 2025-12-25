@@ -17,7 +17,7 @@ $(MAN):
 	help2man --no-info -I man.in $(PROGRAM) -o $(MAN)
 
 $(HTML): $(MAN)
-	man2html $(MAN) > $(HTML) 
+	man -Thtml $(MAN) > $(HTML) 
 
 show: $(MAN)
 	man $(MAN)
