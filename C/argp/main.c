@@ -1,143 +1,106 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include <error.h>
+#include <argz.h>
 #include <argp.h>
+#include <error.h>
 
-const char *argp_program_version =
-  "argp-ex4 1.0";
-const char *argp_program_bug_address =
-  "<bug-gnu-utils@prep.ai.mit.edu>";
+#define PROGNAME "progname"
+#define PROGVERSION "1.0"
+
+const char *argp_program_bug_address = "<bug-gnu-utils@gnu.org>";
+const char *argp_program_version = 
+"progname 1.0\n"
+"\n"
+"Copyright (c) 20XX J. Doe.\n"
+"MIT License.\n"
+"\n"
+"Written by J. Doe.\n";
 
 /* Program documentation. */
-static char doc[] =
-  "Argp example #4 -- a program with somewhat more complicated\
-options\
-\vThis part of the documentation comes *after* the options;\
- note that the text is automatically filled, but it's possible\
- to force a line-break, e.g.\n<-- here.";
+static char doc[] = "test - a program with options and arguments using argp.\v"
+"It can be parsed by help2man for generating a man page.";
 
 /* A description of the arguments we accept. */
-static char args_doc[] = "ARG1 [STRING...]";
+static char args_doc[] = "ARG1 [ARG2]";
 
-/* Keys for options without short-options. */
-#define OPT_ABORT  1            /* –abort */
-
-/* The options we understand. */
-static struct argp_option options[] = {
-  {"verbose",  'v', 0,       0, "Produce verbose output" },
-  {"quiet",    'q', 0,       0, "Don't produce any output" },
-  {"silent",   's', 0,       OPTION_ALIAS },
-  {"output",   'o', "FILE",  0,
-   "Output to FILE instead of standard output" },
-
-  {0,0,0,0, "The following options should be grouped together:" },
-  {"repeat",   'r', "COUNT", OPTION_ARG_OPTIONAL,
-   "Repeat the output COUNT (default 10) times"},
-  {"abort",    OPT_ABORT, 0, 0, "Abort before showing any output"},
-
-  { 0 }
-};
-
-/* Used by main to communicate with parse_opt. */
 struct arguments
 {
-  char *arg1;                   /* arg1 */
-  char **strings;               /* [string...] */
-  int silent, verbose, abort;   /* ‘-s’, ‘-v’, ‘--abort’ */
-  char *output_file;            /* file arg to ‘--output’ */
-  int repeat_count;             /* count arg to ‘--repeat’ */
+    char *argz;
+    size_t argz_len;
 };
 
-/* Parse a single option. */
-static error_t
-parse_opt (int key, char *arg, struct argp_state *state)
+static int parse_opt (int key, char *arg, struct argp_state *state)
 {
-  /* Get the input argument from argp_parse, which we
-     know is a pointer to our arguments structure. */
-  struct arguments *arguments = state->input;
-
-  switch (key)
+    struct arguments *a = state->input;
+    switch (key)
     {
-    case 'q': case 's':
-      arguments->silent = 1;
-      break;
-    case 'v':
-      arguments->verbose = 1;
-      break;
-    case 'o':
-      arguments->output_file = arg;
-      break;
-    case 'r':
-      arguments->repeat_count = arg ? atoi (arg) : 10;
-      break;
-    case OPT_ABORT:
-      arguments->abort = 1;
-      break;
-
-    case ARGP_KEY_NO_ARGS:
-      argp_usage (state);
-
-    case ARGP_KEY_ARG:
-      /* Here we know that state->arg_num == 0, since we
-         force argument parsing to end before any more arguments can
-         get here. */
-      arguments->arg1 = arg;
-
-      /* Now we consume all the rest of the arguments.
-         state->next is the index in state->argv of the
-         next argument to be parsed, which is the first string
-         we’re interested in, so we can just use
-         &state->argv[state->next] as the value for
-         arguments->strings.
-
-         In addition, by setting state->next to the end
-         of the arguments, we can force argp to stop parsing here and
-         return. */
-      arguments->strings = &state->argv[state->next];
-      state->next = state->argc;
-
-      break;
-
-    default:
-      return ARGP_ERR_UNKNOWN;
+        case 'd': 
+            unsigned int i;
+            unsigned int dots = 0;
+            if (arg == NULL)
+            {
+                dots = 1;
+            }
+            else
+            {
+                dots = atoi (arg);
+            }
+            for (i = 0; i < dots; i++){printf (".");}
+            printf("\n");
+            break;
+        case 'p':
+            parse_opt('d', "3", state);
+            break;
+            break;
+        case ARGP_KEY_ARG:
+            argz_add (&a->argz, &a->argz_len, arg);
+            break;
+        case ARGP_KEY_INIT:
+            a->argz = 0;
+            a->argz_len = 0;
+            break;
+        case ARGP_KEY_END:
+             {
+                 size_t count = argz_count (a->argz, a->argz_len);
+                 if (count > 2)
+                     argp_failure (state, 1, 0, "too many arguments");
+                 else if (count < 1)
+                     argp_failure (state, 1, 0, "too few arguments");
+             }
+             break;
     }
-  return 0;
+    return 0;
 }
-
-/* Our argp parser. */
-static struct argp argp = { options, parse_opt, args_doc, doc };
-
-int
-main (int argc, char **argv)
+struct argp_option options[] =
 {
-  int i, j;
-  struct arguments arguments;
+    { "dot"   , 'd', "NUM", OPTION_ARG_OPTIONAL, "Show a dot on the screen"},
+    { 0       , 'p', "NUM", OPTION_ALIAS       , "Show a dot on the screen"},
+    { 0 }
+};
 
-  /* Default values. */
-  arguments.silent = 0;
-  arguments.verbose = 0;
-  arguments.output_file = "-";
-  arguments.repeat_count = 1;
-  arguments.abort = 0;
+struct argp argp = { options, parse_opt, args_doc, doc };
 
-  /* Parse our arguments; every option seen by parse_opt will be
-     reflected in arguments. */
-  argp_parse (&argp, argc, argv, 0, 0, &arguments);
+int main (int argc, char **argv)
+{
+    struct arguments arguments;
+    error_t err;
+    err = argp_parse (&argp, argc, argv, 0, 0, &arguments);
 
-  if (arguments.abort)
-    error (10, 0, "ABORTED");
-
-  for (i = 0; i < arguments.repeat_count; i++)
+    if(err == 0)
     {
-      printf ("ARG1 = %s\n", arguments.arg1);
-      printf ("STRINGS = ");
-      for (j = 0; arguments.strings[j]; j++)
-        printf (j == 0 ? "%s" : ", %s", arguments.strings[j]);
-      printf ("\n");
-      printf ("OUTPUT_FILE = %s\nVERBOSE = %s\nSILENT = %s\n",
-              arguments.output_file,
-              arguments.verbose ? "yes" : "no",
-              arguments.silent ? "yes" : "no");
+        const char *prev = NULL;
+        char *word;
+        while ((word = argz_next (arguments.argz, arguments.argz_len, prev)))
+        {
+            printf (" %s", word);
+            prev = word;
+        }
+        printf ("\n");
+        free (arguments.argz);
+        return EXIT_SUCCESS;
     }
-
-  exit (0);
+    else
+    {
+        return EXIT_FAILURE;
+    }
 }
