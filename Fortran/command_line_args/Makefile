@@ -21,6 +21,10 @@ $(C_OBJECTS): $(C_SOURCES)
 
 $(F_OBJECTS): $(F_SOURCES)
 	$(FC) -c $(FFLAGS) $^ -o $(BUILD_DIR)/$@
+        
+run: $(EXE)
+	./$(BUILD_DIR)/$(EXE) --help
+	./$(BUILD_DIR)/$(EXE) --version
 
 clean:
 	rm -rf $(BUILD_DIR)/*
