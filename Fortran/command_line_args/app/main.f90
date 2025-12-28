@@ -6,6 +6,7 @@ program main
     use stdlib_stringlist_type
     use stdlib_str2num, only: to_num
     use stdlib_kinds, only: sp, dp
+    use fargp
     implicit none
     
     ! Parameters
@@ -16,7 +17,9 @@ program main
     character(len=*), parameter :: SHORT_DESCRIPTION = PROGRAM_NAME//' - '//'Test program in Fortran.'
     character(len=*), parameter :: DESCRIPTION = 'This text goes under the options.'
     character(len=*), parameter :: EMAIL = '<milan.skocic@gmail.com>'
-   
+  
+    type(fargp_metadata) :: m
+
     ! variables
     type(ansi_code) :: highlight 
     integer :: iostat
@@ -32,6 +35,13 @@ program main
     
     highlight = fg_color_blue + style_bold
 
+    m%name = "fapp"
+    m%author = "M. Skocic"
+    m%version = "0.1"
+    m%bug_address = "<milan.skocic@gmail.com>"
+    m%short_description = "Test program in Fortran."
+    m%long_description = 'This text goes under the options.'
+    m%license = 'MIT License'
 
     do i=1, command_argument_count()
         call get_command_argument(i, arg)
@@ -43,9 +53,9 @@ program main
         end if
         select case(arg)
             case ("-V", "--version")
-                call print_version()
+                call print_version(m)
             case ("-?", "--help")
-                call print_help()
+                call print_help(m)
             case default
                 r = to_num(arg, r)
                 print *, r
@@ -57,28 +67,6 @@ program main
 
 
 contains
-
-subroutine print_help()
-    print '(A)', 'Usage: '//PROGRAM_NAME//' [OPTION...] ARGS'
-    print '(A)', SHORT_DESCRIPTION
-    print '(A)',    ''
-    print '(a)',    '   -?, --help        Give this help list'
-    print '(a)',    '       --usage       Give a short usage message'
-    print '(a)',    '   -V, --version     Print program version'
-    print '(a)',    ''
-    print '(a)',    DESCRIPTION
-    print '(a)',    ''
-    print '(a)',    'Report bugs to '//EMAIL
-end subroutine print_help
-
-subroutine print_version()
-    print '(A)', PROGRAM_NAME//' '//VERSION
-    print '(A)',    ''
-    print '(A)',    'Copyright (c) 2025 '//AUTHOR
-    print '(A)',    'MIT License'
-    print '(A)',    ''
-    print '(A)',    'Written by '//AUTHOR
-end subroutine
 
 
 subroutine display_string_list(strlist)
