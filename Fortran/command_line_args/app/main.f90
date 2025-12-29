@@ -6,6 +6,7 @@ program main
     use stdlib_stringlist_type
     use stdlib_str2num, only: to_num
     use stdlib_kinds, only: sp, dp
+    use stdlib_math, only: linspace
     use fargp
     implicit none
     
@@ -24,7 +25,7 @@ program main
     type(ansi_code) :: highlight 
     integer :: iostat
     character(len=buffer_size) :: arg
-    integer :: i
+    integer :: i, j, k, l, start, end, n
     real(dp) :: r
     character(len=64) :: s
 
@@ -77,5 +78,12 @@ subroutine display_string_list(strlist)
         print '(I2, 4X, A)', i, char(strlist%get(fidx(i)))
     end do
 end subroutine
+
+function parse_opt(key, arg, state)result(res)
+    integer, intent(in) :: key 
+    character(len=*)    :: arg
+    type(fargp_state)   :: state
+    integer             :: res
+end function
     
 end program main
