@@ -1,4 +1,4 @@
-module fargp
+module fargparser
     !! Argp-like for Fortran.
     !! Mimic argp available for C but adapted to Fortran OOP.
     use stdlib_string_type
@@ -6,14 +6,6 @@ module fargp
     implicit none
     private
 
-    abstract interface
-        function myparser(key, arg, state)result(res)
-            integer, intent(in) :: key 
-            character(len=*)    :: arg
-            type(fargp_state)   :: state
-            integer             :: res
-        end function    
-    end interface
 
     type fargp_metadata
         !! It specifies how to document the program
@@ -45,10 +37,22 @@ module fargp
 
     type fargp
         !! It specifies how to parse a given set of options and arguments. 
-        type(fargp_option) :: options(:)
+        type(fargp_option), pointer :: options(:)
         procedure(myparser), pointer, nopass :: parser 
         type(string_type) :: args_doc !! Inline documentation for ARGS. Only used in Usage:...
         type(string_type) :: doc !! Additional doc to be printed.
+    end type
+    
+    abstract interface
+        function myparser(key, arg, state)result(res)
+            import fargp_state
+            integer, intent(in) :: key 
+            character(len=*)    :: arg
+            type(fargp_state)   :: state
+            integer             :: res
+        end function    
+    end interface
+
     interface
         module subroutine print_version(m)
             type(fargp_metadata) :: m
@@ -59,7 +63,7 @@ module fargp
         end subroutine
     end interface
 
-    public :: fargp_metadata, fargp_option, fargp_state
+    public :: fargp_metadata, fargp_option, fargp_state, fargp
     public :: print_version, print_help
 
 contains

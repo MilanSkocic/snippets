@@ -7,7 +7,7 @@ program main
     use stdlib_str2num, only: to_num
     use stdlib_kinds, only: sp, dp
     use stdlib_math, only: linspace
-    use fargp
+    use fargparser
     implicit none
     
     ! Parameters

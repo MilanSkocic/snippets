@@ -1,4 +1,4 @@
-submodule (fargp) farp_s
+submodule (fargparser) fargparser_s
     !! Implementations
     implicit none
 
