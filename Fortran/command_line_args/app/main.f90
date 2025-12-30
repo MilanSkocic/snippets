@@ -1,4 +1,5 @@
 program main
+    use iso_fortran_env, only: output_unit
     use stdlib_ansi, only : fg_color_blue, style_bold, style_reset, ansi_code, &
     & operator(//), operator(+)
     use stdlib_string_type
@@ -19,11 +20,11 @@ program main
     character(len=*), parameter :: DESCRIPTION = 'This text goes under the options.'
     character(len=*), parameter :: EMAIL = '<milan.skocic@gmail.com>'
   
-    type(fargp_metadata) :: m
+    type(program_type) :: m
 
     ! variables
     type(ansi_code) :: highlight 
-    integer :: iostat
+    integer :: iostat, errstat
     character(len=buffer_size) :: arg
     integer :: i, j, k, l, start, end, n
     real(dp) :: r
@@ -33,51 +34,44 @@ program main
     type(stringlist_type)       :: options
     type(stringlist_type)       :: args
     type(stringlist_index_type) :: index
+
+    type(fargp_option) :: myoptions(1) 
     
+    myoptions(1)%name = "--print"
+
     highlight = fg_color_blue + style_bold
 
-    m%name = "fapp"
-    m%author = "M. Skocic"
-    m%version = "0.1"
-    m%bug_address = "<milan.skocic@gmail.com>"
-    m%short_description = "Test program in Fortran."
-    m%long_description = 'This text goes under the options.'
-    m%license = 'MIT License'
+    errstat = m%init(name="fapp", version="1.0", &
+               SHORT_DESCRIPTION="Short description of the program can do.",&
+           author="M. Skocic", bug_address="<milan.skocic@gmail.com>")
 
-    do i=1, command_argument_count()
-        call get_command_argument(i, arg)
-        myarg=strip(string_type(arg))
-        if(starts_with(myarg, "-") .eqv. .true.) then 
-            call options%insert_at(bidx(1), myarg) 
-        else
-            call args%insert_at(bidx(1), myarg)
-        end if
-        select case(arg)
-            case ("-V", "--version")
-                call print_version(m)
-            case ("-?", "--help")
-                call print_help(m)
-            case default
-                r = to_num(arg, r)
-                print *, r
-        end select
-    end do
+    call m%list_args
+    call m%list_options
 
-    call display_string_list(options)
-    call display_string_list(args)
-
+!    do i=1, command_argument_count()
+!        call get_command_argument(i, arg)
+!        myarg=strip(string_type(arg))
+!        if(starts_with(myarg, "-") .eqv. .true.) then 
+!            call options%insert_at(bidx(1), myarg) 
+!        else
+!            call args%insert_at(bidx(1), myarg)
+!        end if
+!        select case(arg)
+!            case ("-V", "--version")
+!                call print_version(m)
+!            case ("-?", "--help")
+!                call print_help(m)
+!            case default
+!                r = to_num(arg, r)
+!                print *, r
+!        end select
+!    end do
+!
+!    call list_args()
 
 contains
 
 
-subroutine display_string_list(strlist)
-    type(stringlist_type), intent(in) :: strlist
-
-    integer :: i
-    do i=1, strlist%len(), 1
-        print '(I2, 4X, A)', i, char(strlist%get(fidx(i)))
-    end do
-end subroutine
 
 function parse_opt(key, arg, state)result(res)
     integer, intent(in) :: key 
