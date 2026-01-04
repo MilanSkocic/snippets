@@ -23,6 +23,7 @@ program main
     errstat = m%init(name="fapp", version="1.0", &
                      SHORT_DESCRIPTION="Short description of the program can do.",&
                      author="M. Skocic", bug_address="<milan.skocic@gmail.com>")
+    
 
     errstat = m%parse()
     
