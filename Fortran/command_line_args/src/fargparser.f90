@@ -11,7 +11,7 @@ module fargparser
     implicit none
     private
   
-    type program_type
+    type fargparser_type
         !! It specifies how to document the program
         type(string_type) :: name
         type(string_type) :: version
@@ -21,73 +21,50 @@ module fargparser
         type(string_type) :: long_description
         type(string_type) :: license
         type(stringlist_type), private :: largs
-        type(stringlist_type), private :: loptions
         contains
-            procedure :: init => program_type_initialize
-            procedure :: get => program_type_get
-            procedure :: print_version => program_type_print_version
-            procedure :: print_help  => program_type_print_help
-            procedure :: print_usage => program_type_print_usage
-            procedure :: parse => program_type_parse
-            procedure :: list_args => program_type_print_largs 
-            procedure :: list_options => program_type_print_loptions 
+            procedure :: init => fargparser_type_initialize
+            procedure :: get => fargparser_type_get
+            procedure :: print_version => fargparser_type_print_version
+            procedure :: print_help  => fargparser_type_print_help
+            procedure :: print_usage => fargparser_type_print_usage
+            procedure :: list_args => fargparser_type_print_largs 
+            procedure :: add_argument => fargparser_type_add_arg
+            procedure :: parse => fargparser_type_parse
     end type
 
     type fargp_option
         !! It specifies a single option that an argp parser understands, 
         !! as well as how to parse and document that option
-        type(string_type) :: name 
-        integer           :: key 
+        type(string_type) :: long
+        integer           :: short 
         type(string_type) :: args
         integer           :: flags
-        type(string_type) :: doc
-        integer    :: group
+        type(string_type) :: help
     end type
 
-    type fargp_state
-    
-    end type
 
-    type fargp
-        !! It specifies how to parse a given set of options and arguments. 
-        type(fargp_option), pointer :: options(:)
-        procedure(myparser), pointer, nopass :: parser 
-        type(string_type) :: args_doc !! Inline documentation for ARGS. Only used in Usage:...
-        type(string_type) :: doc !! Additional doc to be printed.
-    end type
-    
-    abstract interface
-        function myparser(key, arg, state)result(res)
-            import fargp_state
-            integer, intent(in) :: key 
-            character(len=*)    :: arg
-            type(fargp_state)   :: state
-            integer             :: res
-        end function    
-    end interface
-
-    public :: program_type, fargp_option, fargp_state, fargp !! derived types
+    public :: fargparser_type !! derived types
 
 contains
 
 
 ! INIT -------------------------------------------------------------------------
-function program_type_initialize(this, name, version, &
+function fargparser_type_initialize(this, name, version, &
                                        author, bug_address, &
                                        short_description, long_description, &
                                        license)&
                                        result(res) 
-        !! Initialize the program_type
+        !! Initialize the fargparser_type
 
         ! Parameters
-        class(program_type)                   :: this
+        class(fargparser_type)                 :: this
         character(len=*), intent(in)           :: name              !! Name of the program.
         character(len=*), intent(in)           :: version           !! Version of the program.
         character(len=*), intent(in)           :: short_description !! One-line description of the program.
-        character(len=*), intent(in), optional :: long_description
-        character(len=*), intent(in), optional :: author
-        character(len=*), intent(in), optional :: bug_address
-        character(len=*), intent(in), optional :: license
+        character(len=*), intent(in), optional :: long_description  !! Long description of the program.
+        character(len=*), intent(in), optional :: author            !! Author of the program.
+        character(len=*), intent(in), optional :: bug_address       !! E-mail address for reporting bugs.
+        character(len=*), intent(in), optional :: license           !! License
 
         ! Returns
         integer :: res                                              !! Returns 0 if initialization succeeded otherwise returns > 0.
@@ -109,13 +86,7 @@ function program_type_initialize(this, name, version, &
         do i=1, command_argument_count()
             call get_command_argument(i, arg)
             sarg = string_type(arg)
-            if(starts_with(sarg,"--") .eqv. .true.) then
-                call this%loptions%insert_at(bidx(1), strip(sarg))
-            else if((starts_with(sarg,"-") .eqv. .true.) .and. (is_alpha(arg(2:2))) .eqv. .true.) then
-                call this%loptions%insert_at(bidx(1), strip(sarg))
-            else
-                call this%largs%insert_at(bidx(1), strip(sarg))
-            end if
+            call this%largs%insert_at(bidx(1), strip(sarg))
         end do
 
         res = 0
@@ -125,8 +96,8 @@ end function
 
 
 ! PRINT ------------------------------------------------------------------------
-subroutine program_type_print_version(this)
-    class(program_type) :: this
+subroutine fargparser_type_print_version(this)
+    class(fargparser_type) :: this
     write(output_unit, '(A)') this%get("name")//' '//this%get("version")
     write(output_unit, '(A)')    ''
     write(output_unit, '(a)', advance='no') 'Copyright (c) 2025 '
@@ -139,13 +110,13 @@ subroutine program_type_print_version(this)
     return
 end subroutine
 
-subroutine program_type_print_usage(this)
-    class(program_type) :: this
+subroutine fargparser_type_print_usage(this)
+    class(fargparser_type) :: this
     write(output_unit, '(A)') 'Usage: '//this%get("name")//' [OPTION...] ARGS'
 end subroutine
 
-subroutine program_type_print_help(this)
-    class(program_type) :: this
+subroutine fargparser_type_print_help(this)
+    class(fargparser_type) :: this
     call this%print_usage()
     write(output_unit, '(A)') this%get("short_description")
     write(output_unit, '(A)')    ''
@@ -164,25 +135,17 @@ subroutine program_type_print_help(this)
     end if
 end subroutine 
 
-subroutine program_type_print_largs(this)
-    class(program_type) :: this
+subroutine fargparser_type_print_largs(this)
+    class(fargparser_type) :: this
     integer :: i
     do i=1, this%largs%len(), 1
         write(output_unit, '(I2, 4X, A)') i, char(this%largs%get(fidx(i)))
     end do
 end subroutine
 
-subroutine program_type_print_loptions(this)
-    class(program_type) :: this
-    integer :: i
-    do i=1, this%loptions%len(), 1
-        write(output_unit, '(I2, 4X, A)') i, char(this%loptions%get(fidx(i)))
-    end do
-end subroutine
-
 ! GETTERS ----------------------------------------------------------------------
-function program_type_get(this, prop)result(res)
-    class(program_type) :: this
+function fargparser_type_get(this, prop)result(res)
+    class(fargparser_type) :: this
     character(len=*), intent(in) :: prop
     character(len=:), allocatable :: res
     select case (prop)
@@ -208,9 +171,29 @@ end function
 
 
 ! PARSER -----------------------------------------------------------------------
-function program_type_parse(this)result(res)
-    class(program_type) :: this
+function fargparser_type_parse(this)result(res)
+    !! Parse all arguments
+    class(fargparser_type) :: this
     integer :: res
+    
+    integer :: i
+
+    do i=1, this%largs%len(), 1
+        select case( char( this%largs%get(fidx(i)) ) )
+            case ("--version", "-V")
+                call this%print_version()
+                stop
+            case ("--help", "-?")
+                call this%print_version()
+                stop 
+            case ("--usage")
+                call this%print_usage()
+                stop 
+            case default
+        end select
+                
+    end do
+
     res = 0
 end function
 
