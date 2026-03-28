@@ -4,7 +4,7 @@ BUILD_DIR=build
 SRC_DIR=src
 LINKER=gfortran
 CFLAGS=-std=c11
-FFLAGS=-std=f2008 -J$(BUILD_DIR)
+FFLAGS=-std=f2018 -J$(BUILD_DIR)
 LDFLAGS=
 C_SOURCES=$(wildcard $(SRC_DIR)/*.c)
 F_SOURCES=$(SRC_DIR)/progress.f90 $(SRC_DIR)/main.f90
