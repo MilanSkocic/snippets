@@ -1,0 +1,31 @@
+NAME
+  mydebian - post installer for Debian.
+
+SYNOPSIS
+  mydebian COMMAND [OPTIONS]" 
+
+DESCRIPTION
+  Simple post installer for Debian. The commands are defined as: 
+    + 13                            Post installation for Debian 13 (trixie).
+    + 14                            Post installation for Debian 14 (forky).
+    + altgcc <version> <priority>   Add alternate for gcc or python.
+    + altpy <version> <priority>    Add alternate for gcc or python.
+    + pysrc <version>               Download python from python.org.
+
+OPTIONS
+  --list          List packages.
+  --version, -v   Display version.
+  --verbose, -V   Increase verbosity.
+  --help, -h      Display help.
+
+EXAMPLE
+  Minimal example
+
+    mydebian 13" 
+    mydebian 13 --list" 
+    mydebian add altgcc 15 100
+    mydebian add altpy 3.14 100
+    mydebian pysrc 3.14.2
+
+SEE ALSO
+  apt(8)

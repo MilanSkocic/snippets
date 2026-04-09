@@ -1,0 +1,17 @@
+mydebian (0.6-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Milan Skocic <milan.skocic@gmail.com>  Wed, 08 Apr 2026 14:04:44 +0200
+
+mydebian (0.5-2) unstable; urgency=medium
+
+  * Patch Makefile for man page as compressed gz.
+
+ -- Milan Skocic <milan.skocic@gmail.com>  Wed, 08 Apr 2026 10:45:25 +0200
+
+mydebian (0.5-1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- Milan Skocic <milan.skocic@gmail.com>  Tue, 07 Apr 2026 10:42:33 +0200

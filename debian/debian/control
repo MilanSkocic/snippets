@@ -1,0 +1,20 @@
+Source: mydebian
+Section: misc
+Priority: optional
+Maintainer: Milan Skocic <milan.skocic@gmail.com>
+Build-Depends:
+ debhelper-compat (= 13)
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Homepage: https://github.com/MilanSkocic/mydebian
+
+Package: mydebian
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Description: post installer for Debian
+ Simple post installer for Debian. The commands are defined as: 
+   + 13                                       Post installation for Debian 13 (trixie).
+   + 14                                       Post installation for Debian 14 (forky).
+   + add <gcc|python> <version> <priority>    Add alternate for gcc or python.
+   + dowload_python <version>                 Download python from python.org.

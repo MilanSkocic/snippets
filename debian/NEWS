@@ -1,0 +1,37 @@
+VERSION 0.6
+- API break.
+- The command add ggc|python <version> <priority> was replaced by two commands.
+  - altgcc <version> <priority> for setting alternatives for gcc.
+  - altpy <version> <priority> for setting alternatives for py.
+
+
+
+VERSION 0.5
+- Add debian packaging structure
+- Update Makefile for debian packaging.
+
+
+
+VERSION 0.4
+- Format help and version texts.
+
+
+
+VERSION 0.3
+- Refactoring
+- Remove pdf and txt outputs for man pages.
+- README is generated from the help text.
+
+
+
+VERSION 0.2
+- Code cleaning
+- Simplify commands.
+
+
+
+VERSION 0.1
+- Install set of packages for Debian 13 .
+- List option for packages
+- Add gcc and python alternatives
+- Download python sources

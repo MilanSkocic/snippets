@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+sudo rm -rf Packages.gz
+cd $HOME/Documents/3-Resources/debian 
+dpkg-scanpackages -m . /dev/null |gzip -9c > Packages.gz

@@ -1,0 +1,163 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Wed Apr  8 14:06:09 2026 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mydebian</title>
+
+</head>
+<body>
+
+<h1 align="center">mydebian</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mydebian</b>
+- post installer for Debian.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mydebian</b>
+<i>COMMAND</i> [OPTIONS]&quot;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Simple post
+installer for Debian. The commands are defined as:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>+ 13</b></p></td>
+<td width="4%"></td>
+<td width="52%">
+
+
+<p>Post installation for Debian 13 (trixie).</p></td>
+<td width="21%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>+ 14</b></p></td>
+<td width="4%"></td>
+<td width="52%">
+
+
+<p>Post installation for Debian 14 (forky).</p></td>
+<td width="21%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>+ altgcc &lt;version&gt;
+&lt;priority&gt;</b></p>
+
+<p style="margin-left:27%;">Add alternate for gcc or
+python.</p>
+
+<p style="margin-left:18%;"><b>+ altpy &lt;version&gt;
+&lt;priority&gt;</b></p>
+
+<p style="margin-left:27%;">Add alternate for gcc or
+python.</p>
+
+<p style="margin-left:18%;"><b>+ pysrc
+&lt;version&gt;</b></p>
+
+<p style="margin-left:27%;">Download python from
+python.org.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>--list</b></p></td>
+<td width="1%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">List packages.</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--version, -v</b></p>
+
+<p style="margin-left:18%;">Display version.</p>
+
+<p style="margin-left:9%;"><b>--verbose, -V</b></p>
+
+<p style="margin-left:18%;">Increase verbosity.</p>
+
+<p style="margin-left:9%;"><b>--help, -h</b></p>
+
+<p style="margin-left:18%;">Display help.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Minimal
+example</p>
+
+<p style="margin-left:9%; margin-top: 1em">mydebian
+13&quot; <br>
+mydebian 13 --list&quot; <br>
+mydebian add altgcc 15 100 <br>
+mydebian add altpy 3.14 100 <br>
+mydebian pysrc 3.14.2</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>apt</b>(8)</p>
+<hr>
+</body>
+</html>

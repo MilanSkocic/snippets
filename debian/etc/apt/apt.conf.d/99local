@@ -1,0 +1,2 @@
+Acquire::GzipIndexes "false"; 
+APT::Sandbox::User "root";

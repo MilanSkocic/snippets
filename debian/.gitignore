@@ -1,0 +1,10 @@
+make.in
+build/
+
+debian/*
+!debian/changelog
+!debian/control
+!debian/copyright
+!debian/rules
+
+
