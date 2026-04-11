@@ -125,7 +125,7 @@ add_gcc () {
 }
 
 add_python () {
-    sudo update-alternatives --install /usr/bin/python3 python /usr/local/bin/python$1 $2 --slave /usr/bin/pip3 pip /usr/local/bin/pip$1
+    sudo update-alternatives --install /usr/bin/python python /usr/local/bin/python$1 $2 --slave /usr/bin/pip pip /usr/local/bin/pip$1
 }
 
 download_python () {
