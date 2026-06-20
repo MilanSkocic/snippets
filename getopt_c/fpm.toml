@@ -1,0 +1,6 @@
+name="kTe"
+version="1.0.2"
+
+[[executable]]
+name="kTe"
+main="main.c"
